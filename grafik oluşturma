@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hesap vakti </title>
+  <style>
+    body{
+      background-color: aqua;
+    }
+   /* veriler  */
+   .a{
+    position: relative;
+    height: 50px;
+    width: 60px;
+    border: dashed 2px red;
+    border-radius: 100%;
+    display: flex;
+    margin-top: 5px;
+    text-align: center;
+   }
+
+   /* grafiği */
+   #evg{
+    position: absolute;
+    right: 500px;
+    top: 150px;
+    border: solid 2px blue;
+    height: 500px;
+    width: 600px;
+   
+  
+   }
+   /* grafiğe isim vermek yeri inputt */
+   #gi{
+    position: relative;
+    height: 15px;
+    width: 250px;
+   }
+/* buttonlar */
+   .g{
+    position: absolute;
+    right: 80px;
+    top: 20px;
+    margin: 20px;
+   }
+   /* yazdırma  */
+
+  #prnt{
+    position: relative;
+    top: 1px;
+    right: 1px;
+  }
+
+  
+
+  </style>
+</head>
+<body>
+  <button onclick="hspleşme()">hesaplaşmaa</button>
+  <button id="prnt" onclick="window.print()">print</button>
+  
+
+  
+<p id="p"></p>
+<!-- grafik  başlığı oluşturma -->
+<input id="gi" type="text" placeholder="grafiğini isim veriniz" >
+
+<p>Su</p><input value="0" type="number" id="ab" class="a" placeholder= "veri 1 ">
+<p>Elektrik</p> <input value="0" type="number" id="ac" class="a" placeholder="veri 2 ">
+<p>doğal gaz</p><input value="0" type="number" id="ad" class="a" placeholder="veri 3  ">
+<p>İnternet</p> <input value="0" type="number" id="ae" class="a" placeholder="veri 4 ">
+<p>Telefon</p> <input value="0" type="number" id="af" class="a" placeholder=" veri 5">
+<p>kira</p> <input value="0" type="number" id="ag" class="a" placeholder="veri 6 ">
+
+
+<!-- grafik çeşitleri -->
+<div class="g">
+<button onclick="sg()"  >sütun grafiği</button>
+<button onclick="cg()"  >çubuk grafiği</button>
+<button onclick="pg()"  >pasta grafiği</button>
+<button onclick="ag()"  >alan  grafiği</button>
+
+
+</div>
+
+
+
+
+<!-- ev giderleri grafiği -->
+ <div id="evg" ></div>
+ 
+
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+
+
+  function hspleşme() {
+
+
+/* ev giderleri */
+var ab=parseFloat( document.getElementById("ab").value); 
+var ac=parseFloat( document.getElementById("ac").value); 
+var ad=parseFloat( document.getElementById("ad").value); 
+var ae=parseFloat( document.getElementById("ae").value); 
+var af=parseFloat( document.getElementById("af").value); 
+var ag=parseFloat( document.getElementById("ag").value); 
+
+
+
+
+var t=parseFloat( document.getElementById("p").innerHTML=(ab+ac+ad+ae+af+ag ));
+
+
+ /* ev giderleri grafiği */
+
+     
+    }
+
+    function pg(){
+     
+var grafikism=document.getElementById("gi").value;
+var ab=parseFloat( document.getElementById("ab").value); 
+var ac=parseFloat( document.getElementById("ac").value); 
+var ad=parseFloat( document.getElementById("ad").value); 
+var ae=parseFloat( document.getElementById("ae").value); 
+var af=parseFloat( document.getElementById("af").value); 
+var ag=parseFloat( document.getElementById("ag").value); 
+      document.getElementById("evg");
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawwChart);
+      function drawwChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+         
+          ['su', ab],
+          ['elektrik', ac],
+          ['doğal gaz', ad],
+          ['interner',  ae],
+          ['telefon',      af],
+          ['kira',     ag],
+
+
+       
+       
+        ]);
+
+        var options = {
+          title: grafikism ,
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById("evg"));
+        chart.draw(data, options);      
+
+
+
+      };
+
+
+    }
+
+
+    function sg(){
+
+     
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      var grafikism=document.getElementById("gi").value;
+var ab=parseFloat( document.getElementById("ab").value); 
+var ac=parseFloat( document.getElementById("ac").value); 
+var ad=parseFloat( document.getElementById("ad").value); 
+var ae=parseFloat( document.getElementById("ae").value); 
+var af=parseFloat( document.getElementById("af").value); 
+var ag=parseFloat( document.getElementById("ag").value); 
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Move', 'Percentage'],
+          ['kira',     ag],
+          ['telefon',      af],
+          ['interner',  ae],
+          ['doğal gaz', ad],
+          ['elektrik', ac],
+          ['su', ab],
+
+        ]);
+
+        var options = {
+          width: 800,
+          legend: { position: 'none' },
+          chart: {
+            title: 'Chess opening moves',
+            subtitle: 'popularity by percentage' },
+          axes: {
+            x: {
+              0: { side: 'top', label: 'White to move'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('evg'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
+    }
+    
+  
+
+      
+function cg(){
+  var grafikism=document.getElementById("gi").value;
+var ab=parseFloat( document.getElementById("ab").value); 
+var ac=parseFloat( document.getElementById("ac").value); 
+var ad=parseFloat( document.getElementById("ad").value); 
+var ae=parseFloat( document.getElementById("ae").value); 
+var af=parseFloat( document.getElementById("af").value); 
+var ag=parseFloat( document.getElementById("ag").value); 
+
+google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales',],
+          ['kira',     ag],
+          ['telefon',      af],
+          ['interner',  ae],
+          ['doğal gaz', ad],
+          ['elektrik', ac],
+          ['su', ab],
+        ]);
+
+        var options = {
+          chart: {
+            title: grafikism,
+            
+          },
+          bars: 'horizontal' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('evg'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+}
+
+function ag(){
+  var grafikism=document.getElementById("gi").value;
+var ab=parseFloat( document.getElementById("ab").value); 
+var ac=parseFloat( document.getElementById("ac").value); 
+var ad=parseFloat( document.getElementById("ad").value); 
+var ae=parseFloat( document.getElementById("ae").value); 
+var af=parseFloat( document.getElementById("af").value); 
+var ag=parseFloat( document.getElementById("ag").value); 
+
+
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          
+          ['kira',     ag],
+          ['telefon',      af],
+          ['interner',  ae],
+          ['doğal gaz', ad],
+          ['elektrik', ac],
+          ['su', ab],
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('evg'));
+        chart.draw(data, options);
+      }
+
+}
+
+
+
+</script>
+
+
+
+
+ 
+  
+</body>
+</html>
